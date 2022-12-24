@@ -9,8 +9,9 @@ getgenv().Merge = true;
 getgenv().AutoKill = true;
 getgenv().MoneyGrabber = true;
 getgenv().Spam = true;
-
-
+getgenv().LoopKill = true;
+getgenv().SpamDoor = true;
+getgenv().LoopMoney = true;
 
 
 local Tab = Window:MakeTab({
@@ -63,12 +64,24 @@ Tab:AddButton({
   	end    
 })
 
+Tab:AddToggle({
+	Name = "looppick up money from ground",
+	Default = (bool),
+	Callback = function(bool)
+		getgenv().LoopMoney = bool
+		print(bool)
+		if bool then
+		LoopMoney()
+		end
+	end    
+    
+})
 
 
 
 
 local Section = Tab:AddSection({
-	Name = "Killing boss"
+	Name = "Killing"
 })
 
 
@@ -86,6 +99,7 @@ game:GetService("Players").LocalPlayer.Character.SMG.Remotes.TakeDamage:FireServ
   	end    
 })
 
+
 Tab:AddButton({
 	Name = "Kill boss/ FOR PISTOL",
 	Callback = function()
@@ -97,6 +111,39 @@ local args = {
     game:GetService("Players").LocalPlayer.Character.Pistol.Remotes.TakeDamage:FireServer(unpack(args))
   	end    
 })
+
+
+
+Tab:AddButton({
+	Name = "Kill other players/ FOR SMG",
+	Callback = function()
+ local lp = game:GetService("Players").LocalPlayer
+ 
+ 
+ for i,v in pairs(game.Players:GetPlayers()) do
+            if v.Name ~= lp.Name then
+game:GetService("Players").LocalPlayer.Character.SMG.Remotes.TakeDamage:FireServer(v.Character.Humanoid,math.huge) 
+end
+end
+
+  	end    
+})
+
+
+Tab:AddToggle({
+	Name = "loopkill others/For smg",
+	Default = (bool),
+	Callback = function(bool)
+		getgenv().LoopKill = bool
+		print(bool)
+		if bool then
+		LoopKill()
+		end
+	end    
+    
+})
+
+
 
 
 
@@ -166,3 +213,24 @@ end
 end
 end
 
+function LoopKill()
+    while getgenv().LoopKill == true do
+        wait(0.5)
+         local lp = game:GetService("Players").LocalPlayer
+ 
+ 
+ for i,v in pairs(game.Players:GetPlayers()) do
+            if v.Name ~= lp.Name then
+game:GetService("Players").LocalPlayer.Character.SMG.Remotes.TakeDamage:FireServer(v.Character.Humanoid,math.huge) 
+end
+end
+end
+end
+
+
+function LoopMoney()
+    while getgenv().LoopMoney == true do
+        wait()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Money.CFrame
+end
+end
