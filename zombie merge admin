@@ -43,9 +43,7 @@ end;
  local Tool = "Pistol" -- Tool name in your backpack.
 chara.Humanoid:EquipTool(Backpack[Tool])
 wait(1)
-  local PersonCF = game:GetService("Workspace")[(Arguments[1])].HumanoidRootPart.CFrame
-  
- chara.HumanoidRootPart.CFrame = PersonCF
+
 local args = {
     [1] = Person,
     [2] = 9999999999999999999999999999999
@@ -128,4 +126,5 @@ wait(0.5)
 chara.HumanoidRootPart.CFrame = origin
     
     end)
+
 
