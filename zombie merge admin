@@ -15,7 +15,7 @@ local Window = Library:CreateWindow({
 
 
 Window:AddCommand('kill', {'Player'}, 'Murders them ', function(Arguments, Speaker)
-    Window:CreateNotification('Visual Command UI Library', 'Killing...', 5)
+    Window:CreateNotification('Please wait', 'Killing...', 5)
     local lp = game:GetService("Players").LocalPlayer
 local Person = game:GetService("Workspace")[(Arguments[1])].Humanoid
 local Backpack = game.Players.LocalPlayer.Backpack
@@ -107,6 +107,7 @@ game:GetService("Players").LocalPlayer.Character.Pistol.Remotes.TakeDamage:FireS
 end
 end
 chara.HumanoidRootPart.CFrame = origin
+Window:CreateNotification('Results', 'succesfully killed all', 5)
 end)
 
 
