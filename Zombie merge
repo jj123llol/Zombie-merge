@@ -1,7 +1,7 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
 local Window = OrionLib:MakeWindow({Name = "Zombie merge tycoon--by jude/rev", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
-
+getgenv().SlowFall = true;
 getgenv().AutoSell = true;
 getgenv().AutoFarm = true;
 getgenv().Buy = true;
@@ -72,6 +72,62 @@ Tab:AddToggle({
 		print(bool)
 		if bool then
 		LoopMoney()
+		end
+	end    
+    
+})
+
+Tab:AddButton({
+	Name = "high jump",
+	Callback = function()
+
+game.Players.LocalPlayer.Character.Humanoid.Jump = true
+wait()
+for _,v in pairs(game:GetService("Workspace").JumpPad.JumpPad.JumpPed:GetDescendants()) do
+if v:IsA("TouchTransmitter") then
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 0) --0 is touch
+wait()
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 1) -- 1 is untouch
+end
+end
+for _,v in pairs(game:GetService("Workspace").JumpPad.JumpPad.JumpPed:GetDescendants()) do
+if v:IsA("TouchTransmitter") then
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 0) --0 is touch
+wait()
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 1) -- 1 is untouch
+end
+end
+for _,v in pairs(game:GetService("Workspace").JumpPad.JumpPad.JumpPed:GetDescendants()) do
+if v:IsA("TouchTransmitter") then
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 0) --0 is touch
+wait()
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 1) -- 1 is untouch
+end
+end
+for _,v in pairs(game:GetService("Workspace").JumpPad.JumpPad.JumpPed:GetDescendants()) do
+if v:IsA("TouchTransmitter") then
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 0) --0 is touch
+wait()
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 1) -- 1 is untouch
+end
+end
+
+
+
+
+  	end    
+})
+
+
+
+Tab:AddToggle({
+	Name = "Slow Fall",
+	Default = (bool),
+	Callback = function(bool)
+		getgenv().SlowFall = bool
+		print(bool)
+		if bool then
+		SlowFall()
 		end
 	end    
     
@@ -232,5 +288,18 @@ function LoopMoney()
     while getgenv().LoopMoney == true do
         wait()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Money.CFrame
+end
+end
+
+
+function SlowFall()
+    while getgenv().SlowFall == true do
+        wait(0.3)
+        for _,v in pairs(game:GetService("Workspace").JumpPad.JumpPad.JumpPed:GetDescendants()) do
+if v:IsA("TouchTransmitter") then
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 0) 
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 1) 
+end
+end
 end
 end
