@@ -1,0 +1,131 @@
+local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/VisualRoblox/Roblox/main/UI-Libraries/Visual%20Command%20UI%20Library/Source.lua', true))()
+
+
+local Window = Library:CreateWindow({
+    Name = 'Zombie merge admin-by jude/rev', -- // The name of the created window.
+    IntroText = 'Judes shitty admin', -- // The text that will show in the intro / loading screen.
+    IntroIcon = 'rbxassetid://11215015018', -- // The AssetId of the icon that will show in the intro / loading screen.
+    IntroBlur = true, -- // If there should be a blur during the intro.
+    IntroBlurIntensity = 15, -- // The intensity of the blur.
+    Theme = Library.Themes.dark, -- // The theme the library should use (see more in Themes.md).
+    Position = 'bottom', -- // The position the Window can be in (Top, TopLeft, TopRight, Bottom, BottomLeft, BottomRight).
+    Draggable = true, -- // If the window is draggable (Only only X-axis).
+    Prefix = ';' -- // The prefix that will be used before typing a command (will make the UI popup as well).
+})
+
+
+Window:AddCommand('kill', {'Player'}, 'Murders them ', function(Arguments, Speaker)
+    Window:CreateNotification('Visual Command UI Library', 'Killing...', 5)
+    local lp = game:GetService("Players").LocalPlayer
+local Person = game:GetService("Workspace")[(Arguments[1])].Humanoid
+local Backpack = game.Players.LocalPlayer.Backpack
+local chara = game.Players.LocalPlayer.Character
+            local origin = chara.HumanoidRootPart.CFrame
+            workspace.CurrentCamera.CameraSubject = Person
+
+ 
+chara.HumanoidRootPart.CFrame = CFrame.new(257.469543, 4.76648617, -101.616592, -0.341388673, 8.4573692e-08, 0.939922214, 8.36443306e-08, 1, -5.95990421e-08, -0.939922214, 5.82727253e-08, -0.341388673)
+wait(0.1)
+chara.HumanoidRootPart.CFrame = CFrame.new(148.090622, 5.49167871, -230.444626, -0.725138187, -1.11674957e-07, 0.688603401, -9.50216474e-08, 1, 6.21128748e-08, -0.688603401, -2.03918109e-08, -0.725138187)
+ wait(0.1)
+chara.HumanoidRootPart.CFrame = CFrame.new(-17.0035381, 4.82500839, -267.583405, -0.992946684, 5.81306381e-09, 0.118561588, 5.84006665e-09, 1, -1.19677282e-10, -0.118561588, 5.7357441e-10, -0.992946684)
+wait(0.1)
+chara.HumanoidRootPart.CFrame = CFrame.new(-173.41597, 4.85427141, -201.622681, -0.922996461, -1.88294944e-08, -0.384808421, -1.87569871e-08, 1, -3.94186017e-09, 0.384808421, 3.57952379e-09, -0.922996461)
+wait(0.1)
+chara.HumanoidRootPart.CFrame = CFrame.new(-259.897552, 4.85426998, -58.0711174, -0.320418894, -8.72377939e-08, -0.947275937, -3.74940861e-08, 1, -7.94108388e-08, 0.947275937, 1.00725108e-08, -0.320418894)
+for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+     if v:IsA'Tool' then
+          v.Parent = game.Players.LocalPlayer.Backpack;
+     end;
+end; 
+
+ wait(0.1)
+ local Tool = "Pistol" -- Tool name in your backpack.
+chara.Humanoid:EquipTool(Backpack[Tool])
+wait(1)
+  local PersonCF = game:GetService("Workspace")[(Arguments[1])].HumanoidRootPart.CFrame
+  
+ chara.HumanoidRootPart.CFrame = PersonCF
+local args = {
+    [1] = Person,
+    [2] = 9999999999999999999999999999999
+}
+
+game:GetService("Players").LocalPlayer.Character.Pistol.Remotes.TakeDamage:FireServer(unpack(args))
+    wait(0.5)
+chara.HumanoidRootPart.CFrame = origin
+workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character
+end)
+
+
+Window:AddCommand('Samples', {'me'}, 'gives u a ton of samples', function(Arguments, Speaker)
+    local args = {
+    [1] = 17,
+    [2] = Vector3.new(0.5297885537147522, 2.22316575050354, 319.39422607421875)
+}
+
+game:GetService("ReplicatedStorage").Signals.RemoteEvents.GetWoolRemote:FireServer(unpack(args))
+
+end)
+
+
+Window:AddCommand('Sell', {'me'}, 'sells samples', function(Arguments, Speaker)
+game:GetService("ReplicatedStorage").Signals.RemoteEvents.PutRemote:FireServer()
+    
+end)
+
+
+Window:AddCommand('KillBoss', {'me'}, 'Kills the boss', function(Arguments, Speaker)
+local lp = game:GetService("Players").LocalPlayer
+local Backpack = game.Players.LocalPlayer.Backpack
+local chara = game.Players.LocalPlayer.Character
+            local origin = chara.HumanoidRootPart.CFrame
+            local Boss = game:GetService("Workspace").Boss.Boss.Humanoid
+                workspace.CurrentCamera.CameraSubject = Boss
+
+ 
+chara.HumanoidRootPart.CFrame = CFrame.new(257.469543, 4.76648617, -101.616592, -0.341388673, 8.4573692e-08, 0.939922214, 8.36443306e-08, 1, -5.95990421e-08, -0.939922214, 5.82727253e-08, -0.341388673)
+wait(0.1)
+chara.HumanoidRootPart.CFrame = CFrame.new(148.090622, 5.49167871, -230.444626, -0.725138187, -1.11674957e-07, 0.688603401, -9.50216474e-08, 1, 6.21128748e-08, -0.688603401, -2.03918109e-08, -0.725138187)
+ wait(0.1)
+chara.HumanoidRootPart.CFrame = CFrame.new(-17.0035381, 4.82500839, -267.583405, -0.992946684, 5.81306381e-09, 0.118561588, 5.84006665e-09, 1, -1.19677282e-10, -0.118561588, 5.7357441e-10, -0.992946684)
+wait(0.1)
+chara.HumanoidRootPart.CFrame = CFrame.new(-173.41597, 4.85427141, -201.622681, -0.922996461, -1.88294944e-08, -0.384808421, -1.87569871e-08, 1, -3.94186017e-09, 0.384808421, 3.57952379e-09, -0.922996461)
+wait(0.1)
+chara.HumanoidRootPart.CFrame = CFrame.new(-259.897552, 4.85426998, -58.0711174, -0.320418894, -8.72377939e-08, -0.947275937, -3.74940861e-08, 1, -7.94108388e-08, 0.947275937, 1.00725108e-08, -0.320418894)
+for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+     if v:IsA'Tool' then
+          v.Parent = game.Players.LocalPlayer.Backpack;
+     end;
+end; 
+
+ wait(0.1)
+ local Tool = "Pistol" -- Tool name in your backpack.
+chara.Humanoid:EquipTool(Backpack[Tool])
+wait(0.1)
+local args = {
+    [1] = workspace.Boss.Boss.Humanoid,
+    [2] = 999999
+}
+    game:GetService("Players").LocalPlayer.Character.Pistol.Remotes.TakeDamage:FireServer(unpack(args))
+        wait(0.5)
+workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character
+wait(0.7)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Money.CFrame
+wait(0.5)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Money.CFrame
+wait(0.5)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Money.CFrame
+wait(0.5)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Money.CFrame
+wait(0.5)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Money.CFrame
+wait(0.5)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Money.CFrame
+wait(0.5)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Money.CFrame
+wait(0.5)
+chara.HumanoidRootPart.CFrame = origin
+    
+    end)
+
