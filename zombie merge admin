@@ -25,13 +25,13 @@ local chara = game.Players.LocalPlayer.Character
 
  
 chara.HumanoidRootPart.CFrame = CFrame.new(257.469543, 4.76648617, -101.616592, -0.341388673, 8.4573692e-08, 0.939922214, 8.36443306e-08, 1, -5.95990421e-08, -0.939922214, 5.82727253e-08, -0.341388673)
-wait(0.1)
+wait()
 chara.HumanoidRootPart.CFrame = CFrame.new(148.090622, 5.49167871, -230.444626, -0.725138187, -1.11674957e-07, 0.688603401, -9.50216474e-08, 1, 6.21128748e-08, -0.688603401, -2.03918109e-08, -0.725138187)
- wait(0.1)
+ wait()
 chara.HumanoidRootPart.CFrame = CFrame.new(-17.0035381, 4.82500839, -267.583405, -0.992946684, 5.81306381e-09, 0.118561588, 5.84006665e-09, 1, -1.19677282e-10, -0.118561588, 5.7357441e-10, -0.992946684)
-wait(0.1)
+wait()
 chara.HumanoidRootPart.CFrame = CFrame.new(-173.41597, 4.85427141, -201.622681, -0.922996461, -1.88294944e-08, -0.384808421, -1.87569871e-08, 1, -3.94186017e-09, 0.384808421, 3.57952379e-09, -0.922996461)
-wait(0.1)
+wait()
 chara.HumanoidRootPart.CFrame = CFrame.new(-259.897552, 4.85426998, -58.0711174, -0.320418894, -8.72377939e-08, -0.947275937, -3.74940861e-08, 1, -7.94108388e-08, 0.947275937, 1.00725108e-08, -0.320418894)
 for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
      if v:IsA'Tool' then
@@ -39,10 +39,10 @@ for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
      end;
 end; 
 
- wait(0.1)
+ wait(0.3)
  local Tool = "Pistol" -- Tool name in your backpack.
 chara.Humanoid:EquipTool(Backpack[Tool])
-wait(1)
+wait(0.3)
 
 local args = {
     [1] = Person,
@@ -73,6 +73,46 @@ game:GetService("ReplicatedStorage").Signals.RemoteEvents.PutRemote:FireServer()
 end)
 
 
+Window:AddCommand('KillAll', {'me'}, 'Kills Everyone', function(Arguments, Speaker)
+    local Backpack = game.Players.LocalPlayer.Backpack
+local chara = game.Players.LocalPlayer.Character
+            local origin = chara.HumanoidRootPart.CFrame
+local lp = game:GetService("Players").LocalPlayer
+
+
+chara.HumanoidRootPart.CFrame = CFrame.new(257.469543, 4.76648617, -101.616592, -0.341388673, 8.4573692e-08, 0.939922214, 8.36443306e-08, 1, -5.95990421e-08, -0.939922214, 5.82727253e-08, -0.341388673)
+wait()
+chara.HumanoidRootPart.CFrame = CFrame.new(148.090622, 5.49167871, -230.444626, -0.725138187, -1.11674957e-07, 0.688603401, -9.50216474e-08, 1, 6.21128748e-08, -0.688603401, -2.03918109e-08, -0.725138187)
+ wait()
+chara.HumanoidRootPart.CFrame = CFrame.new(-17.0035381, 4.82500839, -267.583405, -0.992946684, 5.81306381e-09, 0.118561588, 5.84006665e-09, 1, -1.19677282e-10, -0.118561588, 5.7357441e-10, -0.992946684)
+wait()
+chara.HumanoidRootPart.CFrame = CFrame.new(-173.41597, 4.85427141, -201.622681, -0.922996461, -1.88294944e-08, -0.384808421, -1.87569871e-08, 1, -3.94186017e-09, 0.384808421, 3.57952379e-09, -0.922996461)
+wait()
+chara.HumanoidRootPart.CFrame = CFrame.new(-259.897552, 4.85426998, -58.0711174, -0.320418894, -8.72377939e-08, -0.947275937, -3.74940861e-08, 1, -7.94108388e-08, 0.947275937, 1.00725108e-08, -0.320418894)
+for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+     if v:IsA'Tool' then
+          v.Parent = game.Players.LocalPlayer.Backpack;
+     end;
+end; 
+
+ wait(0.3)
+ local Tool = "Pistol" -- Tool name in your backpack.
+chara.Humanoid:EquipTool(Backpack[Tool])
+wait(0.3)
+ 
+ 
+ for i,v in pairs(game.Players:GetPlayers()) do
+            if v.Name ~= lp.Name then
+game:GetService("Players").LocalPlayer.Character.Pistol.Remotes.TakeDamage:FireServer(v.Character.Humanoid,math.huge) 
+end
+end
+chara.HumanoidRootPart.CFrame = origin
+end)
+
+
+
+
+
 Window:AddCommand('KillBoss', {'me'}, 'Kills the boss', function(Arguments, Speaker)
 local lp = game:GetService("Players").LocalPlayer
 local Backpack = game.Players.LocalPlayer.Backpack
@@ -97,7 +137,7 @@ for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
      end;
 end; 
 
- wait(0.1)
+ wait(0.2)
  local Tool = "Pistol" -- Tool name in your backpack.
 chara.Humanoid:EquipTool(Backpack[Tool])
 wait(0.1)
