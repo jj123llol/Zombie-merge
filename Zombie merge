@@ -52,6 +52,19 @@ Tab:AddToggle({
     
 })
 
+Tab:AddToggle({
+	Name = "Auto upgrade rate",
+	Default = (bool),
+	Callback = function(bool)
+		getgenv().Buy = bool
+		print(bool)
+		if bool then
+		AutoBuy()
+		end
+	end    
+    
+})
+
 
 
 
@@ -76,6 +89,18 @@ Tab:AddToggle({
 	end    
     
 })
+
+
+
+
+
+
+
+
+
+
+
+
 
 Tab:AddButton({
 	Name = "high jump",
@@ -200,6 +225,32 @@ Tab:AddToggle({
 })
 
 
+Tab:AddButton({
+    Name = "Kill everything [must have a gun in inventory]--cred:amnoob",
+    Callback = function()
+        local plr = game.Players.LocalPlayer
+        local chara = plr.Character
+        local damage
+        chara.Humanoid:UnequipTools()
+        for i,v in pairs(plr.Backpack:GetDescendants()) do
+            if v:IsA("RemoteEvent") and v.Name == "TakeDamage" then
+                damage = v
+                break
+            end
+        end
+        local allhumans = {}
+        for i,v in pairs(workspace:GetDescendants()) do
+            if v:IsA("Humanoid") and v.Parent.Name ~= plr.Name and v.Parent.Parent.Name ~= "Pot" then
+                table.insert(allhumans,v)
+                task.wait()
+            end
+        end
+        for i,v in pairs(allhumans) do
+            damage:FireServer(v,math.huge)
+        end
+    end    
+})
+
 
 
 
@@ -234,14 +285,13 @@ end
 
 function AutoBuy()
      while getgenv().Buy == true do
-         for _,v in pairs(game:GetService("Workspace").Tycoon.Tycoons.B["Buttons_E"].Add.Head:GetDescendants()) do
-if v:IsA("TouchTransmitter") then
-firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 0) --0 is touch
-wait()
-firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 1) -- 1 is untouch
+         wait()
+         local plr = game.Players.LocalPlayer
+local team = plr.Team.Name
+local touch = workspace.Tycoon.Tycoons[team]["Buttons_E"].Upgrade.Head
+firetouchinterest(plr.Character.HumanoidRootPart,touch,0)
+firetouchinterest(plr.Character.HumanoidRootPart,touch,1)
 end
-         end
-     end
 end
 function AutoMerge()
      while getgenv().Merge == true do
