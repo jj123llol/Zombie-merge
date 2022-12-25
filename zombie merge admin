@@ -73,6 +73,133 @@ game:GetService("ReplicatedStorage").Signals.RemoteEvents.PutRemote:FireServer()
 end)
 
 
+  Window:AddCommand('autokillboss', {'me'}, 'auto Kills boss', function(Arguments, Speaker)
+    getgenv().autokillboss = true
+    while getgenv().autokillboss do
+        local lp = game:GetService("Players").LocalPlayer
+        local Backpack = game.Players.LocalPlayer.Backpack
+        local chara = game.Players.LocalPlayer.Character
+        local origin = chara.HumanoidRootPart.CFrame
+        if workspace.Boss:FindFirstChild("Boss",true) then
+            local Boss = game:GetService("Workspace").Boss.Boss.Humanoid
+            for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+                if v:IsA'Tool' then
+                    v.Parent = game.Players.LocalPlayer.Backpack;
+                end;
+            end; 
+
+            wait(0.2)
+            local Tool = "Pistol" -- Tool name in your backpack.
+            chara.Humanoid:EquipTool(Backpack[Tool])
+            wait(0.1)
+            local args = {
+                [1] = workspace.Boss.Boss.Humanoid,
+                [2] = 999999
+            }
+            lp.Character.Pistol.Remotes.TakeDamage:FireServer(unpack(args))
+            wait(10)
+        end
+        wait()
+    end
+end)
+
+
+Window:AddCommand('unautokillboss', {'me'}, '', function(Arguments, Speaker)
+getgenv().autokillboss = false
+end)
+
+
+
+
+
+
+Window:AddCommand('loopkill', {'person'}, 'loop Kills person', function(Arguments, Speaker)
+getgenv().loopkill = true
+while getgenv().loopkill do
+    
+  local lp = game:GetService("Players").LocalPlayer
+local Person = game:GetService("Workspace")[(Arguments[1])].Humanoid
+local Backpack = game.Players.LocalPlayer.Backpack
+local chara = game.Players.LocalPlayer.Character
+            local origin = chara.HumanoidRootPart.CFrame
+           
+
+
+for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+     if v:IsA'Tool' then
+          v.Parent = game.Players.LocalPlayer.Backpack;
+     end;
+end; 
+
+ wait(0.3)
+ local Tool = "Pistol" -- Tool name in your backpack.
+chara.Humanoid:EquipTool(Backpack[Tool])
+wait(0.3)
+
+local args = {
+    [1] = Person,
+    [2] = 9999999999999999999999999999999
+}
+
+game:GetService("Players").LocalPlayer.Character.Pistol.Remotes.TakeDamage:FireServer(unpack(args))
+wait(1)
+    end
+end)
+
+Window:AddCommand('unloopkillall', {'me'}, '', function(Arguments, Speaker)
+    getgenv().loopkill = false
+    end)
+
+
+
+
+
+
+
+
+Window:AddCommand('loopkillall', {'me'}, 'loop Kills Everyone', function(Arguments, Speaker)
+getgenv().loopkillall = true
+while getgenv().loopkillall do
+
+local Backpack = game.Players.LocalPlayer.Backpack
+local chara = game.Players.LocalPlayer.Character
+            local origin = chara.HumanoidRootPart.CFrame
+local lp = game:GetService("Players").LocalPlayer
+
+for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+     if v:IsA'Tool' then
+          v.Parent = game.Players.LocalPlayer.Backpack;
+     end;
+end; 
+
+ wait(0.3)
+ local Tool = "Pistol" -- Tool name in your backpack.
+chara.Humanoid:EquipTool(Backpack[Tool])
+wait(0.3)
+ 
+ 
+ for i,v in pairs(game.Players:GetPlayers()) do
+            if v.Name ~= lp.Name then
+game:GetService("Players").LocalPlayer.Character.Pistol.Remotes.TakeDamage:FireServer(v.Character.Humanoid,math.huge) 
+wait(1)
+end
+end
+end
+end)
+
+
+
+
+Window:AddCommand('unloopkillall', {'me'}, '', function(Arguments, Speaker)
+    getgenv().loopkillall = false
+    end)
+
+
+
+
+
+
+
 Window:AddCommand('KillAll', {'me'}, 'Kills Everyone', function(Arguments, Speaker)
     local Backpack = game.Players.LocalPlayer.Backpack
 local chara = game.Players.LocalPlayer.Character
