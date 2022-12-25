@@ -146,7 +146,7 @@ wait(1)
     end
 end)
 
-Window:AddCommand('unloopkillall', {'me'}, '', function(Arguments, Speaker)
+Window:AddCommand('unloopkill', {'me'}, '', function(Arguments, Speaker)
     getgenv().loopkill = false
     end)
 
