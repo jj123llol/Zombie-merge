@@ -58,9 +58,9 @@ Tab:AddToggle({
 
 
 Tab:AddButton({
-	Name = "Pick up money from ground",
+	Name = "Pick up 1 money from ground",
 	Callback = function()
-      		MoneyGrabberREAL()
+      		game:GetService("Workspace").Money.Position = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position
   	end    
 })
 
@@ -257,17 +257,7 @@ end
 
 
 
-function MoneyGrabberREAL()
-    while getgenv().MoneyGrabber == true do
-        for _,v in pairs(game:GetService("Workspace").Money:GetDescendants()) do
-if v:IsA("TouchTransmitter") then
-firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 0) --0 is touch
-wait()
-firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 1) -- 1 is untouch
-end
-end
-end
-end
+
 
 function LoopKill()
     while getgenv().LoopKill == true do
@@ -287,7 +277,7 @@ end
 function LoopMoney()
     while getgenv().LoopMoney == true do
         wait()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Money.CFrame
+        game:GetService("Workspace").Money.Position = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position
 end
 end
 
@@ -298,6 +288,7 @@ function SlowFall()
         for _,v in pairs(game:GetService("Workspace").JumpPad.JumpPad.JumpPed:GetDescendants()) do
 if v:IsA("TouchTransmitter") then
 firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 0) 
+wait(0.5)
 firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 1) 
 end
 end
