@@ -1,39 +1,296 @@
-local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/VisualRoblox/Roblox/main/UI-Libraries/Visual%20Command%20UI%20Library/Source.lua', true))()
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+local Window = OrionLib:MakeWindow({Name = "Zombie merge tycoon--by jude/rev", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+getgenv().SlowFall = true;
+getgenv().AutoSell = true;
+getgenv().AutoFarm = true;
+getgenv().Buy = true;
+getgenv().Merge = true;
+getgenv().AutoKill = true;
+getgenv().MoneyGrabber = true;
+getgenv().Spam = true;
+getgenv().LoopKill = true;
+getgenv().SpamDoor = true;
+getgenv().LoopMoney = true;
+getgenv().CashAuto = true;
+
+local Tab = Window:MakeTab({
+	Name = "scripts",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
 
 
-local Window = Library:CreateWindow({
-    Name = 'Zombie merge admin-by jude/rev', -- // The name of the created window.
-    IntroText = 'Judes shitty admin', -- // The text that will show in the intro / loading screen.
-    IntroIcon = 'rbxassetid://11215015018', -- // The AssetId of the icon that will show in the intro / loading screen.
-    IntroBlur = true, -- // If there should be a blur during the intro.
-    IntroBlurIntensity = 15, -- // The intensity of the blur.
-    Theme = Library.Themes.dark, -- // The theme the library should use (see more in Themes.md).
-    Position = 'bottom', -- // The position the Window can be in (Top, TopLeft, TopRight, Bottom, BottomLeft, BottomRight).
-    Draggable = true, -- // If the window is draggable (Only only X-axis).
-    Prefix = ';' -- // The prefix that will be used before typing a command (will make the UI popup as well).
+local Section = Tab:AddSection({
+	Name = "AutoFarming"
+})
+
+Tab:AddToggle({
+	Name = "AutoFarm",
+	Default = (bool),
+	Callback = function(bool)
+		getgenv().AutoFarm = bool
+		print(bool)
+		if bool then
+		AutoFarm()
+		end
+	end    
+    
+})
+
+
+Tab:AddToggle({
+	Name = "Auto Sell",
+	Default = (bool),
+	Callback = function(bool)
+		getgenv().AutoSell = bool
+		print(bool)
+		if bool then
+		AutoSell()
+		end
+	end    
+    
+})
+
+
+Tab:AddToggle({
+	Name = "Auto kill,and pick up money",
+	Default = (bool),
+	Callback = function(bool)
+		getgenv().CashAuto = bool
+		print(bool)
+		if bool then
+		CashAuto()
+		end
+	end    
+    
+})
+
+Tab:AddToggle({
+	Name = "Auto upgrade rate",
+	Default = (bool),
+	Callback = function(bool)
+		getgenv().Buy = bool
+		print(bool)
+		if bool then
+		AutoBuy()
+		end
+	end    
+    
 })
 
 
 
-Window:CreateNotification('READ ME', 'Loop commands require u to have pistol in backpack', 10)
+Tab:AddButton({
+	Name = "tp all zombies",
+	Callback = function()
+      		print("button pressed")
+      		local Players = game:GetService("Players")
+local lp = Players.LocalPlayer
+local char = lp.Character
+local hum = char.Humanoid
+local hrp = char.HumanoidRootPart
 
-
-
-Window:AddCommand('killEverything', {'me'}, 'Kills everything,including zombies', function(Arguments, Speaker)
-    local plr = game.Players.LocalPlayer
-        local chara = plr.Character
-    local origin = chara.HumanoidRootPart.CFrame
- chara.HumanoidRootPart.CFrame = CFrame.new(257.469543, 4.76648617, -101.616592, -0.341388673, 8.4573692e-08, 0.939922214, 8.36443306e-08, 1, -5.95990421e-08, -0.939922214, 5.82727253e-08, -0.341388673)
-wait()
-chara.HumanoidRootPart.CFrame = CFrame.new(148.090622, 5.49167871, -230.444626, -0.725138187, -1.11674957e-07, 0.688603401, -9.50216474e-08, 1, 6.21128748e-08, -0.688603401, -2.03918109e-08, -0.725138187)
- wait()
-chara.HumanoidRootPart.CFrame = CFrame.new(-17.0035381, 4.82500839, -267.583405, -0.992946684, 5.81306381e-09, 0.118561588, 5.84006665e-09, 1, -1.19677282e-10, -0.118561588, 5.7357441e-10, -0.992946684)
-wait()
-chara.HumanoidRootPart.CFrame = CFrame.new(-173.41597, 4.85427141, -201.622681, -0.922996461, -1.88294944e-08, -0.384808421, -1.87569871e-08, 1, -3.94186017e-09, 0.384808421, 3.57952379e-09, -0.922996461)
-wait()
-chara.HumanoidRootPart.CFrame = CFrame.new(-259.897552, 4.85426998, -58.0711174, -0.320418894, -8.72377939e-08, -0.947275937, -3.74940861e-08, 1, -7.94108388e-08, 0.947275937, 1.00725108e-08, -0.320418894)
+ local yourtycoon
+ local zombies
  
- wait(1)
+ 
+ 
+local function GetTycoon()
+    for i,v in pairs(game:GetService("Workspace").Tycoon.Tycoons:GetDescendants()) do
+        if v:IsA("ObjectValue") and v.Name == "Owner" then
+            if v.Value == lp then
+                yourtycoon = v.Parent.Name
+            end
+        end
+    end
+end
+GetTycoon()
+
+ 
+ 
+ 
+ local char = lp.Character    
+                    local hum = char.Humanoid
+                    local hrp = char.HumanoidRootPart
+                    
+                    local gate = game:GetService("Workspace").Tycoon.Tycoons[yourtycoon].Essentials.Gate.Beam
+                
+                    for i,v in pairs(game:GetService("Workspace").Zombies:GetDescendants()) do
+                        if v:IsA("Part") and v.Name == "HumanoidRootPart" then  
+                            v.CFrame = hrp.CFrame + hrp.CFrame.lookVector * 7
+                            task.wait(.2)
+                        end
+                    end
+      		
+      		
+  	end    
+})
+
+
+
+
+Tab:AddButton({
+	Name = "Pick up 1 money from ground",
+	Callback = function()
+      		game:GetService("Workspace").Money.Position = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position
+  	end    
+})
+
+Tab:AddToggle({
+	Name = "looppick up money from ground",
+	Default = (bool),
+	Callback = function(bool)
+		getgenv().LoopMoney = bool
+		print(bool)
+		if bool then
+		LoopMoney()
+		end
+	end    
+    
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tab:AddButton({
+	Name = "high jump",
+	Callback = function()
+
+game.Players.LocalPlayer.Character.Humanoid.Jump = true
+wait()
+for _,v in pairs(game:GetService("Workspace").JumpPad.JumpPad.JumpPed:GetDescendants()) do
+if v:IsA("TouchTransmitter") then
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 0) --0 is touch
+wait()
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 1) -- 1 is untouch
+end
+end
+for _,v in pairs(game:GetService("Workspace").JumpPad.JumpPad.JumpPed:GetDescendants()) do
+if v:IsA("TouchTransmitter") then
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 0) --0 is touch
+wait()
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 1) -- 1 is untouch
+end
+end
+for _,v in pairs(game:GetService("Workspace").JumpPad.JumpPad.JumpPed:GetDescendants()) do
+if v:IsA("TouchTransmitter") then
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 0) --0 is touch
+wait()
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 1) -- 1 is untouch
+end
+end
+for _,v in pairs(game:GetService("Workspace").JumpPad.JumpPad.JumpPed:GetDescendants()) do
+if v:IsA("TouchTransmitter") then
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 0) --0 is touch
+wait()
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 1) -- 1 is untouch
+end
+end
+
+
+
+
+  	end    
+})
+
+
+
+Tab:AddToggle({
+	Name = "Slow Fall",
+	Default = (bool),
+	Callback = function(bool)
+		getgenv().SlowFall = bool
+		print(bool)
+		if bool then
+		SlowFall()
+		end
+	end    
+    
+})
+
+
+
+
+local Section = Tab:AddSection({
+	Name = "Killing"
+})
+
+
+Tab:AddParagraph("READ BEFORE USING","Kill boss only works with SMG or pistol,Please hold out one of those weapons while you press the button")
+
+Tab:AddButton({
+	Name = "Kill boss/ FOR SMG",
+	Callback = function()
+
+local args = {
+    [1] = workspace.Boss.Boss.Humanoid,
+    [2] = 999999
+}
+game:GetService("Players").LocalPlayer.Character.SMG.Remotes.TakeDamage:FireServer(unpack(args)) 
+  	end    
+})
+
+
+Tab:AddButton({
+	Name = "Kill boss/ FOR PISTOL",
+	Callback = function()
+
+local args = {
+    [1] = workspace.Boss.Boss.Humanoid,
+    [2] = 999999
+}
+    game:GetService("Players").LocalPlayer.Character.Pistol.Remotes.TakeDamage:FireServer(unpack(args))
+  	end    
+})
+
+
+
+Tab:AddButton({
+	Name = "Kill other players/ FOR SMG",
+	Callback = function()
+ local lp = game:GetService("Players").LocalPlayer
+ 
+ 
+ for i,v in pairs(game.Players:GetPlayers()) do
+            if v.Name ~= lp.Name then
+game:GetService("Players").LocalPlayer.Character.SMG.Remotes.TakeDamage:FireServer(v.Character.Humanoid,math.huge) 
+end
+end
+
+  	end    
+})
+
+
+Tab:AddToggle({
+	Name = "loopkill others/For smg",
+	Default = (bool),
+	Callback = function(bool)
+		getgenv().LoopKill = bool
+		print(bool)
+		if bool then
+		LoopKill()
+		end
+	end    
+    
+})
+
+
+Tab:AddButton({
+    Name = "Kill everything [must have a gun in inventory]--cred:amnoob",
+    Callback = function()
+        local plr = game.Players.LocalPlayer
+        local chara = plr.Character
+        local damage
         chara.Humanoid:UnequipTools()
         for i,v in pairs(plr.Backpack:GetDescendants()) do
             if v:IsA("RemoteEvent") and v.Name == "TakeDamage" then
@@ -41,8 +298,7 @@ chara.HumanoidRootPart.CFrame = CFrame.new(-259.897552, 4.85426998, -58.0711174,
                 break
             end
         end
-        
- local allhumans = {}
+        local allhumans = {}
         for i,v in pairs(workspace:GetDescendants()) do
             if v:IsA("Humanoid") and v.Parent.Name ~= plr.Name and v.Parent.Parent.Name ~= "Pot" then
                 table.insert(allhumans,v)
@@ -52,92 +308,153 @@ chara.HumanoidRootPart.CFrame = CFrame.new(-259.897552, 4.85426998, -58.0711174,
         for i,v in pairs(allhumans) do
             damage:FireServer(v,math.huge)
         end
-        chara.HumanoidRootPart.CFrame = origin
-        end)
-        
+    end    
+})
 
 
 
 
-Window:AddCommand('kill', {'Player'}, 'Murders them ', function(Arguments, Speaker)
-    Window:CreateNotification('Please wait', 'Killing...', 5)
-    local plr = game.Players.LocalPlayer
+Tab:AddButton({
+    Name = "Kill zombies [must have a gun in inventory]--cred:amnoob",
+    Callback = function()
+        local plr = game.Players.LocalPlayer
         local chara = plr.Character
         local damage
-local Person = game:GetService("Workspace")[(Arguments[1])].Humanoid
-local Backpack = game.Players.LocalPlayer.Backpack
-            local origin = chara.HumanoidRootPart.CFrame
-            workspace.CurrentCamera.CameraSubject = Person
-
- 
-chara.HumanoidRootPart.CFrame = CFrame.new(257.469543, 4.76648617, -101.616592, -0.341388673, 8.4573692e-08, 0.939922214, 8.36443306e-08, 1, -5.95990421e-08, -0.939922214, 5.82727253e-08, -0.341388673)
-wait()
-chara.HumanoidRootPart.CFrame = CFrame.new(148.090622, 5.49167871, -230.444626, -0.725138187, -1.11674957e-07, 0.688603401, -9.50216474e-08, 1, 6.21128748e-08, -0.688603401, -2.03918109e-08, -0.725138187)
- wait()
-chara.HumanoidRootPart.CFrame = CFrame.new(-17.0035381, 4.82500839, -267.583405, -0.992946684, 5.81306381e-09, 0.118561588, 5.84006665e-09, 1, -1.19677282e-10, -0.118561588, 5.7357441e-10, -0.992946684)
-wait()
-chara.HumanoidRootPart.CFrame = CFrame.new(-173.41597, 4.85427141, -201.622681, -0.922996461, -1.88294944e-08, -0.384808421, -1.87569871e-08, 1, -3.94186017e-09, 0.384808421, 3.57952379e-09, -0.922996461)
-wait()
-chara.HumanoidRootPart.CFrame = CFrame.new(-259.897552, 4.85426998, -58.0711174, -0.320418894, -8.72377939e-08, -0.947275937, -3.74940861e-08, 1, -7.94108388e-08, 0.947275937, 1.00725108e-08, -0.320418894)
-wait(0.5)
-chara.Humanoid:UnequipTools()
+        chara.Humanoid:UnequipTools()
         for i,v in pairs(plr.Backpack:GetDescendants()) do
             if v:IsA("RemoteEvent") and v.Name == "TakeDamage" then
                 damage = v
                 break
             end
         end
-
-wait(0.1)
-damage:FireServer(Person,math.huge)
-    wait(0.5)
-    
-chara.HumanoidRootPart.CFrame = origin
-
-workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character
-
-for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-     if v:IsA'Tool' then
-          v.Parent = game.Players.LocalPlayer.Backpack;
-     end;
-end; 
-
-end)
+        for i,v in pairs(workspace.Zombies:GetDescendants()) do
+            if v:IsA("Humanoid") and v.Parent.Name ~= plr.Name then
+                damage:FireServer(v,math.huge)
+                task.wait()
+            end
+        end
+    end    
+})
 
 
 
 
 
+function AutoFarm()
+    while getgenv().AutoFarm == true do
+         wait()
+        -- Script generated by SimpleSpy - credits to exx#9394
 
-
-
-
-
-Window:AddCommand('Samples', {'me'}, 'gives u a ton of samples', function(Arguments, Speaker)
-    local args = {
+local args = {
     [1] = 17,
     [2] = Vector3.new(0.5297885537147522, 2.22316575050354, 319.39422607421875)
 }
 
 game:GetService("ReplicatedStorage").Signals.RemoteEvents.GetWoolRemote:FireServer(unpack(args))
+end
+end
 
-end)
 
 
-Window:AddCommand('Sell', {'me'}, 'sells samples', function(Arguments, Speaker)
+
+function AutoSell()
+    while getgenv().AutoSell == true do
+         wait()
+
+
 game:GetService("ReplicatedStorage").Signals.RemoteEvents.PutRemote:FireServer()
+
     
-end)
+end
+end
+
+function AutoBuy()
+     while getgenv().Buy == true do
+         wait()
+         local plr = game.Players.LocalPlayer
+local team = plr.Team.Name
+local touch = workspace.Tycoon.Tycoons[team]["Buttons_E"].Upgrade.Head
+firetouchinterest(plr.Character.HumanoidRootPart,touch,0)
+firetouchinterest(plr.Character.HumanoidRootPart,touch,1)
+end
+end
+function AutoMerge()
+     while getgenv().Merge == true do
+         for _,v in pairs(game:GetService("Workspace").Tycoon.Tycoons.A["Buttons_E"].Upgrade.Head:GetDescendants()) do
+if v:IsA("TouchTransmitter") then
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 0) --0 is touch
+wait()
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 1) -- 1 is untouch
+end
+         end
+     end
+end
 
 
-  Window:AddCommand('autokillboss', {'me'}, 'auto Kills boss', function(Arguments, Speaker)
-    getgenv().autokillboss = true
-    while getgenv().autokillboss do
-        local lp = game:GetService("Players").LocalPlayer
+
+
+
+function LoopKill()
+    while getgenv().LoopKill == true do
+        wait(0.5)
+         local lp = game:GetService("Players").LocalPlayer
+ 
+ 
+ for i,v in pairs(game.Players:GetPlayers()) do
+            if v.Name ~= lp.Name then
+game:GetService("Players").LocalPlayer.Character.SMG.Remotes.TakeDamage:FireServer(v.Character.Humanoid,math.huge) 
+end
+end
+end
+end
+
+
+function LoopMoney()
+    while getgenv().LoopMoney == true do
+        wait()
+          local lp = game.Players.LocalPlayer
+          local char = lp.Character    
+                    local hum = char.Humanoid
+                    local hrp = char.HumanoidRootPart
+                    
+                    for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
+                        if v:IsA("Part") and v.Name == "Money" then
+                            v.CanCollide = false
+                            v.CFrame = hrp.CFrame
+                        end
+                    end
+end
+end
+
+
+function SlowFall()
+    while getgenv().SlowFall == true do
+        wait(0.3)
+        for _,v in pairs(game:GetService("Workspace").JumpPad.JumpPad.JumpPed:GetDescendants()) do
+if v:IsA("TouchTransmitter") then
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 0) 
+wait(0.5)
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 1) 
+end
+end
+end
+end
+
+
+function CashAuto()
+    while getgenv().CashAuto == true do
+        wait()
+        local plr = game.Players.LocalPlayer
         local Backpack = game.Players.LocalPlayer.Backpack
-        local chara = game.Players.LocalPlayer.Character
-        local origin = chara.HumanoidRootPart.CFrame
-        if workspace.Boss:FindFirstChild("Boss",true) then
+        local chara = plr.Character
+        local damage
+        chara.Humanoid:UnequipTools()
+        local lp = game.Players.LocalPlayer
+          local char = lp.Character    
+                    local hum = char.Humanoid
+                    local hrp = char.HumanoidRootPart
+                    
+                    if workspace.Boss:FindFirstChild("Boss",true) then
             wait(0.5)
             local Boss = game:GetService("Workspace").Boss.Boss.Humanoid
             for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
@@ -157,321 +474,20 @@ end)
             lp.Character.Pistol.Remotes.TakeDamage:FireServer(unpack(args))
             
             wait(1)
-            
-            for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-     if v:IsA'Tool' then
-          v.Parent = game.Players.LocalPlayer.Backpack;
+            wait(10)
      end;
 end; 
 
-            wait(10)
+                
         end
         wait()
+                    for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+     if v:IsA'Tool' then
+          v.Parent = game.Players.LocalPlayer.Backpack;
     end
-end)
 
-
-Window:AddCommand('unautokillboss', {'me'}, '', function(Arguments, Speaker)
-getgenv().autokillboss = false
-end)
-
-
-
-
-
-
-Window:AddCommand('loopkill', {'person'}, 'loop Kills person', function(Arguments, Speaker)
-getgenv().loopkill = true
-while getgenv().loopkill do
-    
-  local plr = game.Players.LocalPlayer
-        local chara = plr.Character
-        local damage
-local Person = game:GetService("Workspace")[(Arguments[1])].Humanoid
-local Backpack = game.Players.LocalPlayer.Backpack
-            local origin = chara.HumanoidRootPart.CFrame
-           
-
-
-chara.Humanoid:UnequipTools()
-        for i,v in pairs(plr.Backpack:GetDescendants()) do
-            if v:IsA("RemoteEvent") and v.Name == "TakeDamage" then
-                damage = v
-                break
-            end
-        end
-
-damage:FireServer(Person,math.huge)
-wait(1)
-    end
-end)
-
-Window:AddCommand('unloopkill', {'me'}, '', function(Arguments, Speaker)
-    getgenv().loopkill = false
-    end)
-
-
-
-
-
-
-
-
-Window:AddCommand('loopkillall', {'me'}, 'loop Kills Everyone', function(Arguments, Speaker)
-getgenv().loopkillall = true
-while getgenv().loopkillall do
-
-local Backpack = game.Players.LocalPlayer.Backpack
-    local plr = game.Players.LocalPlayer
-    local chara = plr.Character
-            local origin = chara.HumanoidRootPart.CFrame
-
-        
-        local damage
-
-wait(0.5)
-        for i,v in pairs(plr.Backpack:GetDescendants()) do
-            if v:IsA("RemoteEvent") and v.Name == "TakeDamage" then
-                damage = v
-                break
-            end
-        end
- 
- 
- for i,v in pairs(game.Players:GetPlayers()) do
-            if v.Name ~= plr.Name then
-damage:FireServer(v.Character.Humanoid,math.huge) 
 end
-end
-chara.HumanoidRootPart.CFrame = origin
-Window:CreateNotification('Results', 'succesfully killed all', 5)
-
-for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-     if v:IsA'Tool' then
-          v.Parent = game.Players.LocalPlayer.Backpack;
-     end;
-end; 
-end
-end)
 
 
 
-
-Window:AddCommand('unloopkillall', {'me'}, '', function(Arguments, Speaker)
-    getgenv().loopkillall = false
-    end)
-
-
-Window:AddCommand('Killzombies', {'me'}, 'Kills zombies', function(Arguments, Speaker)
-local plr = game.Players.LocalPlayer
-        local chara = plr.Character
-        local damage
-        chara.Humanoid:UnequipTools()
-        for i,v in pairs(plr.Backpack:GetDescendants()) do
-            if v:IsA("RemoteEvent") and v.Name == "TakeDamage" then
-                damage = v
-                break
-            end
-        end
-        for i,v in pairs(workspace.Zombies:GetDescendants()) do
-            if v:IsA("Humanoid") and v.Parent.Name ~= plr.Name then
-                damage:FireServer(v,math.huge)
-                task.wait()
-            end
-        end
-
-end)
-
-
-
-
-
-
-
-Window:AddCommand('KillAll', {'me'}, 'Kills Everyone', function(Arguments, Speaker)
-    local Backpack = game.Players.LocalPlayer.Backpack
-    local plr = game.Players.LocalPlayer
-    local chara = plr.Character
-            local origin = chara.HumanoidRootPart.CFrame
-
-        
-        local damage
-
-
-chara.HumanoidRootPart.CFrame = CFrame.new(257.469543, 4.76648617, -101.616592, -0.341388673, 8.4573692e-08, 0.939922214, 8.36443306e-08, 1, -5.95990421e-08, -0.939922214, 5.82727253e-08, -0.341388673)
-wait()
-chara.HumanoidRootPart.CFrame = CFrame.new(148.090622, 5.49167871, -230.444626, -0.725138187, -1.11674957e-07, 0.688603401, -9.50216474e-08, 1, 6.21128748e-08, -0.688603401, -2.03918109e-08, -0.725138187)
- wait()
-chara.HumanoidRootPart.CFrame = CFrame.new(-17.0035381, 4.82500839, -267.583405, -0.992946684, 5.81306381e-09, 0.118561588, 5.84006665e-09, 1, -1.19677282e-10, -0.118561588, 5.7357441e-10, -0.992946684)
-wait()
-chara.HumanoidRootPart.CFrame = CFrame.new(-173.41597, 4.85427141, -201.622681, -0.922996461, -1.88294944e-08, -0.384808421, -1.87569871e-08, 1, -3.94186017e-09, 0.384808421, 3.57952379e-09, -0.922996461)
-wait()
-chara.HumanoidRootPart.CFrame = CFrame.new(-259.897552, 4.85426998, -58.0711174, -0.320418894, -8.72377939e-08, -0.947275937, -3.74940861e-08, 1, -7.94108388e-08, 0.947275937, 1.00725108e-08, -0.320418894)
-chara.Humanoid:UnequipTools()
-wait(0.5)
-        for i,v in pairs(plr.Backpack:GetDescendants()) do
-            if v:IsA("RemoteEvent") and v.Name == "TakeDamage" then
-                damage = v
-                break
-            end
-        end
- 
- 
- for i,v in pairs(game.Players:GetPlayers()) do
-            if v.Name ~= plr.Name then
-damage:FireServer(v.Character.Humanoid,math.huge) 
-end
-end
-chara.HumanoidRootPart.CFrame = origin
-Window:CreateNotification('Results', 'succesfully killed all', 5)
-
-for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-     if v:IsA'Tool' then
-          v.Parent = game.Players.LocalPlayer.Backpack;
-     end;
-end; 
-
-end)
-
-
-
-
-
-Window:AddCommand('KillBoss', {'me'}, 'Kills the boss', function(Arguments, Speaker)
-local lp = game:GetService("Players").LocalPlayer
-local Backpack = game.Players.LocalPlayer.Backpack
-local chara = game.Players.LocalPlayer.Character
-            local origin = chara.HumanoidRootPart.CFrame
-            local Boss = game:GetService("Workspace").Boss.Boss.Humanoid
-                workspace.CurrentCamera.CameraSubject = Boss
-
- 
-chara.HumanoidRootPart.CFrame = CFrame.new(257.469543, 4.76648617, -101.616592, -0.341388673, 8.4573692e-08, 0.939922214, 8.36443306e-08, 1, -5.95990421e-08, -0.939922214, 5.82727253e-08, -0.341388673)
-wait(0.1)
-chara.HumanoidRootPart.CFrame = CFrame.new(148.090622, 5.49167871, -230.444626, -0.725138187, -1.11674957e-07, 0.688603401, -9.50216474e-08, 1, 6.21128748e-08, -0.688603401, -2.03918109e-08, -0.725138187)
- wait(0.1)
-chara.HumanoidRootPart.CFrame = CFrame.new(-17.0035381, 4.82500839, -267.583405, -0.992946684, 5.81306381e-09, 0.118561588, 5.84006665e-09, 1, -1.19677282e-10, -0.118561588, 5.7357441e-10, -0.992946684)
-wait(0.1)
-chara.HumanoidRootPart.CFrame = CFrame.new(-173.41597, 4.85427141, -201.622681, -0.922996461, -1.88294944e-08, -0.384808421, -1.87569871e-08, 1, -3.94186017e-09, 0.384808421, 3.57952379e-09, -0.922996461)
-wait(0.1)
-chara.HumanoidRootPart.CFrame = CFrame.new(-259.897552, 4.85426998, -58.0711174, -0.320418894, -8.72377939e-08, -0.947275937, -3.74940861e-08, 1, -7.94108388e-08, 0.947275937, 1.00725108e-08, -0.320418894)
-for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-     if v:IsA'Tool' then
-          v.Parent = game.Players.LocalPlayer.Backpack;
-     end;
-end; 
-
- wait(0.2)
- local Tool = "Pistol" -- Tool name in your backpack.
-chara.Humanoid:EquipTool(Backpack[Tool])
-wait(0.1)
-local args = {
-    [1] = workspace.Boss.Boss.Humanoid,
-    [2] = 999999
-}
-    game:GetService("Players").LocalPlayer.Character.Pistol.Remotes.TakeDamage:FireServer(unpack(args))
-        wait(0.5)
-workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character
-wait(0.7)
-chara.HumanoidRootPart.CFrame = origin
-
-for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-     if v:IsA'Tool' then
-          v.Parent = game.Players.LocalPlayer.Backpack;
-     end;
-end; 
-
-game:GetService("Workspace").Money.Position = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position
-wait(0.5)
-game:GetService("Workspace").Money.Position = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position
-wait(0.5)
-game:GetService("Workspace").Money.Position = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position
-wait(0.5)
-game:GetService("Workspace").Money.Position = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position
-wait(0.5)
-game:GetService("Workspace").Money.Position = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position
-wait(0.5)
-game:GetService("Workspace").Money.Position = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position
-wait(0.5)
-game:GetService("Workspace").Money.Position = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position
-wait(0.5)
-game:GetService("Workspace").Money.Position = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position
-wait(0.5)
-game:GetService("Workspace").Money.Position = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position
-wait(0.5)
-    end)
-
-
--- Gui to Lua
--- Version: 3.2
-
--- Instances:
-
-local ScreenGui = Instance.new("ScreenGui")
-local Frame = Instance.new("Frame")
-local ImageLabel = Instance.new("ImageLabel")
-local TextLabel = Instance.new("TextLabel")
-local TextLabel_2 = Instance.new("TextLabel")
-local Close = Instance.new("TextButton")
-
---Properties:
-
-ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-
-Frame.Parent = ScreenGui
-Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Frame.Position = UDim2.new(0.650793672, 0, 0.131025955, 0)
-Frame.Size = UDim2.new(0, 100, 0, 100)
-
-ImageLabel.Parent = Frame
-ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-ImageLabel.Position = UDim2.new(-0.00920635462, 0, -0.00897406042, 0)
-ImageLabel.Size = UDim2.new(0, 100, 0, 100)
-ImageLabel.Image = "rbxassetid://11215015018"
-
-TextLabel.Parent = Frame
-TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel.Position = UDim2.new(0.424920619, 0, -0.500778735, 0)
-TextLabel.Size = UDim2.new(0, 200, 0, 50)
-TextLabel.Font = Enum.Font.SourceSans
-TextLabel.Text = "Its shitty but deal with it"
-TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel.TextSize = 14.000
-
-TextLabel_2.Parent = Frame
-TextLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel_2.Position = UDim2.new(-1.58380938, 0, -0.510778725, 0)
-TextLabel_2.Size = UDim2.new(0, 200, 0, 50)
-TextLabel_2.Font = Enum.Font.SourceSans
-TextLabel_2.Text = "Judes shitty admin"
-TextLabel_2.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel_2.TextSize = 14.000
-
-Close.Name = "Close"
-Close.Parent = Frame
-Close.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-Close.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Close.Position = UDim2.new(2.02111125, 0, -0.00897404552, 0)
-Close.Size = UDim2.new(0, 40, 0, 50)
-Close.Font = Enum.Font.SourceSans
-Close.Text = "X"
-Close.TextColor3 = Color3.fromRGB(0, 0, 0)
-Close.TextScaled = true
-Close.TextSize = 14.000
-Close.TextWrapped = true
-
--- Scripts:
-
-local function MWFZKZW_fake_script() -- Close.LocalScript 
-	local script = Instance.new('LocalScript', Close)
-
-	
-	local Frame = script.Parent.Parent
-	
-	script.Parent.MouseButton1Click:Connect(function()
-		Frame.Visible = false
-	end)
-	
-end
-coroutine.wrap(MWFZKZW_fake_script)()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/jj123llol/My-personal-admin/main/admin",true))()
