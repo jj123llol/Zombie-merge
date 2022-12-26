@@ -18,7 +18,6 @@ local Window = Library:CreateWindow({
 Window:CreateNotification('READ ME', 'Loop commands require u to have pistol in backpack', 10)
 
 
-
 Window:AddCommand('killEverything', {'me'}, 'Kills everything,including zombies', function(Arguments, Speaker)
     local plr = game.Players.LocalPlayer
         local chara = plr.Character
